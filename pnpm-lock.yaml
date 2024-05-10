@@ -23,9 +23,6 @@ dependencies:
   chalk:
     specifier: ^5.3.0
     version: 5.3.0
-  flexsearch:
-    specifier: ^0.7.43
-    version: 0.7.43
   lodash-es:
     specifier: ^4.17.21
     version: 4.17.21
@@ -61,6 +58,9 @@ devDependencies:
   eslint:
     specifier: ^9.2.0
     version: 9.2.0
+  flexsearch:
+    specifier: ^0.7.43
+    version: 0.7.43
   husky:
     specifier: ^9.0.11
     version: 9.0.11
@@ -80,7 +80,7 @@ devDependencies:
     specifier: ^5.4.5
     version: 5.4.5
   vitest:
-    specifier: ^1.6.0
+    specifier: 1.6.0
     version: 1.6.0(@types/node@20.12.10)
 
 packages:
@@ -2626,7 +2626,7 @@ packages:
 
   /flexsearch@0.7.43:
     resolution: {integrity: sha512-c5o/+Um8aqCSOXGcZoqZOm+NqtVwNsvVpWv6lfmSclU954O3wvQKxxK8zj74fPaSJbXpSLTs4PRhh+wnoCXnKg==}
-    dev: false
+    dev: true
 
   /for-each@0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
