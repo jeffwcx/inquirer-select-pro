@@ -5,7 +5,7 @@ An inquirer select that supports multiple selections and filtering/searching.
 Try now?
 
 ```bash
-$ npx @jeffwcx/gitignore
+npx @jeffwcx/gitignore
 ```
 
 [![asciicast](https://asciinema.org/a/658334.svg)](https://asciinema.org/a/658334)
@@ -73,7 +73,6 @@ const answer = await select({
 <img style="display: inline-block; vertical-align: top;" alt="Function" src="https://img.shields.io/badge/Function-666eff?style=flat">
 
 > [!WARNING]
-
 > This API is provided as a beta preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
 
 #### Type
@@ -93,10 +92,10 @@ declare function useSelect<Value, Multiple extends boolean>(
 ## Play
 
 ```bash
-$ pnpm install
+pnpm install
 
 # select demo
-$ pnpm dev
+pnpm dev
 ```
 
 Demo can be specified, and the following demos are available:
@@ -107,7 +106,7 @@ Demo can be specified, and the following demos are available:
 - filter-local
 
 ```bash
-$ pnpm dev filter-remote
+pnpm dev filter-remote
 ```
 
 Parameters can also be fixed. The following parameters can be fixed:
@@ -119,5 +118,5 @@ Parameters can also be fixed. The following parameters can be fixed:
 - multiple
 
 ```bash
-$pnpm dev filter-demo --multiple=false
+pnpm dev filter-demo --multiple=false
 ```
