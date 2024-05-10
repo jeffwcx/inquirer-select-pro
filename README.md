@@ -1,5 +1,8 @@
 # inquirer-select-pro
 
+[![codecov](https://codecov.io/gh/jeffwcx/inquirer-select-pro/graph/badge.svg?token=tjROGqr2yx)](https://codecov.io/gh/jeffwcx/inquirer-select-pro) 
+<a href="https://github.com/jeffwcx/inquirer-select-pro/actions?query=branch%3Amain" target="_blank"><img src="https://img.shields.io/github/actions/workflow/status/jeffwcx/inquirer-select-pro/.github/workflows/build.yml?branch=main" alt="CI" /></a>
+
 An inquirer select that supports multiple selections and filtering/searching.
 
 Try now?
