@@ -46,7 +46,9 @@ const answer = await select({
 
 ### select
 
-<img style="display: inline-block; vertical-align: top;" alt="Variable" src="https://img.shields.io/badge/Variable-666eff?style=flat"> An inquirer select that supports multiple selections and filtering
+<img style="display: inline-block; vertical-align: top;" alt="Variable" src="https://img.shields.io/badge/Variable-666eff?style=flat">
+
+An inquirer select that supports multiple selections and filtering
 
 #### Parameters
 
