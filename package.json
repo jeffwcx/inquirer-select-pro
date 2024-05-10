@@ -28,13 +28,13 @@
     "format": "eslint . --cache --fix",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0 --cache",
     "prepare": "husky",
-    "test": "vitest",
+    "test": "vitest run",
     "test:cov": "vitest run --coverage",
     "typecheck": "tsc --noEmit"
   },
   "lint-staged": {
     "**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,json}": "pnpm format",
-    "**/*.{md}": "prettier --write --ignore-unknown"
+    "**/*.md": "prettier --write --ignore-unknown"
   },
   "prettier": "@jeffwcx/prettier-config",
   "dependencies": {
