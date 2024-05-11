@@ -4,5 +4,10 @@
   "initialVersions": {
     "inquirer-select-pro": "0.1.0"
   },
-  "changesets": ["cuddly-baboons-cross", "dry-spies-decide", "tame-ducks-type"]
+  "changesets": [
+    "cuddly-baboons-cross",
+    "dry-spies-decide",
+    "green-cups-wait",
+    "tame-ducks-type"
+  ]
 }
