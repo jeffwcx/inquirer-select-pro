@@ -20,7 +20,7 @@ npm i inquirer-select-pro
 npx @jeffwcx/gitignore
 ```
 
-[![asciicast](https://asciinema.org/a/658841.svg)](https://asciinema.org/a/658841)
+[![asciicast](https://asciinema.org/a/658848.svg)](https://asciinema.org/a/658848)
 
 > A CLI to generate a `.gitignore` file: [@jeffwcx/gitignore](https://github.com/jeffwcx/jeffwcx-config/blob/main/packages/gitignore).
 
