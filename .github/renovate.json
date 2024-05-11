@@ -1,0 +1,39 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base", "schedule:weekly"],
+  "labels": ["dependencies"],
+  "rebaseWhen": "conflicted",
+  "timezone": "UTC",
+  "rangeStrategy": "bump",
+  "packageRules": [
+    {
+      "description": "Automatically merge minor and patch-level updates",
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "automerge": true,
+      "automergeType": "branch"
+    },
+    {
+      "groupName": "inquirer",
+      "matchPackagePrefixes": ["@inquirer"]
+    },
+    {
+      "groupName": "Test",
+      "matchPackageNames": ["vitest"],
+      "matchPackagePrefixes": ["@vitest"]
+    },
+    {
+      "groupName": "Lint and Format",
+      "matchPackageNames": [
+        "eslint",
+        "@jeffwcx/eslint-config",
+        "prettier",
+        "@jeffwcx/eslint-config"
+      ]
+    },
+    {
+      "groupName": "Release",
+      "matchPackagePatterns": ["@changesets*"]
+    }
+  ],
+  "ignoreDeps": []
+}
