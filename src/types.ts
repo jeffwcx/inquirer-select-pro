@@ -107,7 +107,7 @@ export interface UseSelectOptions<Value, Multiple extends boolean = true> {
    * Required(true), or skip(false)
    *
    * @defaultValue
-   * `true`
+   * `false`
    */
   required?: boolean;
   /**

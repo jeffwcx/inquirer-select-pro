@@ -150,6 +150,7 @@ describe('inquirer-select-pro', () => {
         filter: false,
       });
       await waitForInteraction();
+      events.keypress('up');
       expect(getScreen()).toMatchSnapshot();
     });
 
@@ -351,6 +352,7 @@ describe('inquirer-select-pro', () => {
         instructions: false,
         multiple: false,
       });
+      events.keypress('up');
       expect(getScreen().includes('No results.')).toBe(true);
     });
 

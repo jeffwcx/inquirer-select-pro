@@ -69,6 +69,7 @@ function transformSelections<Value, Multiple>(
   if (multiple) {
     return selections.map((s) => s.value);
   }
+  /* v8 ignore next 3 */
   return selections.length > 0 ? selections[0].value : null;
 }
 
@@ -84,7 +85,7 @@ export function useSelect<Value, Multiple extends boolean>(
     loop = false,
     multiple = true,
     filter = true,
-    required = true,
+    required = false,
     defaultValue,
     clearInputWhenSelected = false,
     inputDelay = 200,

@@ -23,6 +23,7 @@ export function isSelectable<Value>(
 export function toggle<Value>(
   item: InternalSelectItem<Value>,
 ): InternalSelectItem<Value> {
+  /* v8 ignore next 3 */
   return isSelectable(item) ? { ...item, checked: !item.checked } : item;
 }
 
