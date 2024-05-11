@@ -7,8 +7,14 @@
     "prompts",
     "cli",
     "select",
-    "multi"
+    "multiple",
+    "filter",
+    "autocomplete"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeffwcx/inquirer-select-pro"
+  },
   "license": "MIT",
   "author": "jeffwcx <jeffwcx@icloud.com>",
   "type": "module",
@@ -22,15 +28,26 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsx ./examples/cli.ts",
     "format": "eslint . --cache --fix",
+    "preinstall": "only-allow pnpm",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0 --cache",
+    "prepack": "pnpm build",
     "prepare": "husky",
+    "release": "changeset publish",
     "test": "vitest run",
     "test:cov": "vitest run --coverage",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "version-pkg": "changeset version"
   },
   "lint-staged": {
     "**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,json}": "pnpm format",
@@ -60,11 +77,17 @@
     "flexsearch": "^0.7.43",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
+    "only-allow": "^1.2.1",
     "prettier": "^3.2.5",
     "tsup": "^8.0.2",
     "tsx": "^4.9.3",
     "typescript": "^5.4.5",
     "vitest": "1.6.0"
+  },
+  "packageManager": "pnpm@8.15.4",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.15.4"
   },
   "publishConfig": {
     "access": "public"

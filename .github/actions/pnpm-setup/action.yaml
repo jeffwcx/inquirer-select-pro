@@ -1,5 +1,5 @@
-name: "Setup"
-description: "Sets up Node.js and runs install"
+name: 'Setup'
+description: 'Sets up Node.js and runs install'
 
 runs:
   using: composite
