@@ -1,6 +1,6 @@
 {
   "name": "inquirer-select-pro",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "An inquirer select that supports multiple selections and filtering.",
   "keywords": [
     "inquirer",
