@@ -1,7 +1,12 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { render } from '@inquirer/testing';
 import spinners from 'cli-spinners';
-import { type SelectProps, Separator, select } from '../src/index';
+import {
+  type SelectOption,
+  type SelectProps,
+  Separator,
+  select,
+} from '../src/index';
 import { createRemoteData, top100Films } from './data';
 
 type RenderResult = Awaited<ReturnType<typeof render>>;
@@ -612,5 +617,101 @@ describe('inquirer-select-pro', () => {
 
     validationTest('I dont like "The Shawshank Redemption"');
     validationTest(false);
+  });
+
+  describe('theming', () => {
+    it('style.placeholder', async () => {
+      await renderPrompt({
+        message,
+        options: () => top100Films,
+        placeholder: 'search',
+        pageSize: 1,
+        instructions: false,
+        theme: {
+          style: {
+            placeholder: (text: string) => `${text}...`,
+          },
+        },
+      });
+
+      await waitForInteraction();
+
+      expect(getScreen()).toMatchInlineSnapshot(`
+        "? Choose movie:
+        >> search...
+        >[ ] The Shawshank Redemption (1994)"
+      `);
+    });
+
+    it('style.renderSelectedOptions', async () => {
+      await renderPrompt({
+        message,
+        options: top100Films,
+        placeholder: 'search',
+        pageSize: 2,
+        instructions: false,
+        theme: {
+          style: {
+            renderSelectedOptions: (
+              selectedOptions: ReadonlyArray<SelectOption<string>>,
+            ) =>
+              selectedOptions
+                .map((option) => `[${option.name || option.value}]`)
+                .join(' '),
+          },
+        },
+      });
+
+      events.keypress('tab');
+      events.keypress('down');
+      events.keypress('tab');
+
+      expect(getScreen()).toMatchInlineSnapshot(`
+        "? Choose movie: [The Shawshank Redemption (1994)] [The Godfather (1972)]
+         [✔] The Shawshank Redemption (1994)
+        >[✔] The Godfather (1972)"
+      `);
+    });
+
+    it('icon.inputCursor', async () => {
+      await renderPrompt({
+        message,
+        options: () => top100Films,
+        pageSize: 1,
+        instructions: false,
+        theme: {
+          icon: {
+            inputCursor: 'filter: ',
+          },
+        },
+      });
+      await waitForInteraction();
+      expect(getScreen()).toMatchInlineSnapshot(`
+        "? Choose movie:
+        filter:  Type to search
+        >[ ] The Shawshank Redemption (1994)"
+      `);
+    });
+
+    it('icon.check/uncheck', async () => {
+      await renderPrompt({
+        message,
+        options: top100Films,
+        pageSize: 2,
+        instructions: false,
+        theme: {
+          icon: {
+            checked: ' √',
+            unchecked: ' ',
+          },
+        },
+      });
+      events.keypress('tab');
+      expect(getScreen()).toMatchInlineSnapshot(`
+        "? Choose movie: The Shawshank Redemption (1994)
+        > √ The Shawshank Redemption (1994)
+           The Godfather (1972)"
+      `);
+    });
   });
 });

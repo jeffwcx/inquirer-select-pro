@@ -28,14 +28,16 @@ export type SelectTheme = {
     checked: string;
     unchecked: string;
     cursor: string;
+    inputCursor: string;
   };
   style: {
     disabledOption: (text: string) => string;
     renderSelectedOptions: <T>(
       selectedOptions: ReadonlyArray<SelectOption<T>>,
-      allOptions: ReadonlyArray<SelectOption<T> | Separator>,
+      allOptions: ReadonlyArray<SelectItem<T>>,
     ) => string;
     emptyText: (text: string) => string;
+    placeholder: (text: string) => string;
   };
   helpMode: 'always' | 'never' | 'auto';
 };
@@ -126,11 +128,6 @@ export interface UseSelectOptions<Value, Multiple extends boolean = true> {
   validate?: (
     options: ReadonlyArray<SelectOption<Value>>,
   ) => boolean | string | Promise<string | boolean>;
-
-  /**
-   * The text displayed when the search results are empty
-   */
-  emptyText?: string;
 }
 
 export interface SelectBehaviors {
@@ -163,13 +160,41 @@ export interface SelectContext<Value> extends UseSelectReturnValue<Value> {
   pageSize: number;
   instructions: SelectProps<Value>['instructions'];
   emptyText: string;
+  placeholder: string;
 }
 
 export interface SelectProps<Value, Multiple extends boolean = true>
   extends UseSelectOptions<Value, Multiple> {
+  /**
+   * prompt message
+   */
   message: string;
-  prefix?: string;
+  /**
+   * page size
+   */
   pageSize?: number;
+  /**
+   * Pass in false to directly close the instructions.
+   * If you need to display dynamic instructions based on the state of the select,
+   * you can also use the function.
+   */
   instructions?: boolean | ((context: SelectContext<Value>) => string);
+  /**
+   * The text displayed when the search results are empty
+   *
+   * @defaultValue
+   * `"No results."`
+   */
+  emptyText?: string;
+  /**
+   * filter input placeholder
+   *
+   * @defaultValue
+   * `"Type to search"`
+   */
+  placeholder?: string;
+  /**
+   * theming
+   */
   theme?: PartialDeep<Theme<SelectTheme>>;
 }

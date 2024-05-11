@@ -2,6 +2,7 @@ import {
   Separator,
   createPrompt,
   makeTheme,
+  useMemo,
   usePagination,
   usePrefix,
 } from '@inquirer/core';
@@ -26,12 +27,14 @@ const defaultSelectTheme: (multiple: boolean) => SelectTheme = (multiple) => ({
     checked: multiple ? `[${chalk.green(figures.tick)}]` : '',
     unchecked: multiple ? '[ ]' : '',
     cursor: '>',
+    inputCursor: chalk.cyan('>>'),
   },
   style: {
     disabledOption: (text: string) => chalk.dim(`-[x] ${text}`),
     renderSelectedOptions: (selectedOptions) =>
       selectedOptions.map((option) => option.name || option.value).join(', '),
     emptyText: (text) => `${chalk.blue(figures.info)} ${chalk.bold(text)}`,
+    placeholder: (text: string) => chalk.dim(text),
   },
   helpMode: 'auto',
 });
@@ -129,13 +132,13 @@ function renderHelpTip<Value>(context: SelectContext<Value>) {
 }
 
 function renderFilterInput<Value>(
-  { theme, filterInput, status }: SelectContext<Value>,
+  { theme, filterInput, status, placeholder }: SelectContext<Value>,
   answer: string,
 ) {
   if (status === SelectStatus.UNLOADED) return '\n';
-  let input = `\n${theme.style.highlight('>>')} `;
+  let input = `\n${theme.icon.inputCursor} `;
   if (!answer && !filterInput) {
-    input += theme.style.help('Type to search');
+    input += theme.style.placeholder(placeholder);
   } else {
     input += `${answer ? `${answer}` : ''} ${filterInput}`;
   }
@@ -166,7 +169,12 @@ export const select = createPrompt(
     props: SelectProps<Value, Multiple>,
     done: (value: SelectValue<Value, Multiple>) => void,
   ) => {
-    const { instructions, pageSize = 10, emptyText = 'No results.' } = props;
+    const {
+      instructions,
+      pageSize = 10,
+      emptyText = 'No results.',
+      placeholder = 'Type to search',
+    } = props;
 
     const selectData = useSelect({
       ...props,
@@ -181,10 +189,14 @@ export const select = createPrompt(
       multiple,
       enableFilter,
     } = selectData;
-    const theme = makeTheme<SelectTheme>(
-      defaultSelectTheme(multiple),
-      props.theme,
+
+    const defaultTheme = useMemo(
+      () => defaultSelectTheme(multiple),
+      [multiple],
     );
+    const theme = makeTheme<SelectTheme>(defaultTheme, props.theme, {
+      icon: Object.assign(defaultTheme.icon, props.theme?.icon),
+    });
 
     const isLoading =
       status === SelectStatus.UNLOADED || status === SelectStatus.FILTERING;
@@ -207,6 +219,7 @@ export const select = createPrompt(
       pageSize,
       instructions,
       emptyText,
+      placeholder,
     };
 
     const page = renderPage<Value>(context);
