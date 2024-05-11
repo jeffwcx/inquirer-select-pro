@@ -195,10 +195,10 @@ pnpm build
 pnpm test
 ```
 
-> [!INFO]
+> [!NOTE]
 > Running `pnpm dev` actually allows you to specify the demo directly.
-> Here is a list of available demos:
 
+Here is a list of available demos:
 - local
 - remote
 - filter-remote
