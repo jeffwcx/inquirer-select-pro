@@ -214,27 +214,6 @@ describe('inquirer-select-pro', () => {
       );
     });
 
-    it('should select the current option by <enter> when display filtered results', async () => {
-      await renderPrompt({
-        message,
-        options: quickRemoteData,
-        pageSize: 4,
-        inputDelay: 20,
-      });
-      await waitForInteraction();
-      events.type('god');
-      await wait(20);
-      await waitForInteraction();
-      expect(getScreen()).toMatchSnapshot();
-      events.keypress('enter');
-      events.keypress('enter');
-      expect(await answer).toMatchInlineSnapshot(`
-        [
-          "Goodfellas",
-        ]
-      `);
-    });
-
     it('should disable interactions when select is loading', async () => {
       await renderPrompt({
         message,

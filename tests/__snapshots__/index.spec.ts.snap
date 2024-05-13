@@ -32,17 +32,6 @@ exports[`inquirer-select-pro > interactions > should clear input after the optio
  [ ] The Godfather (1972)"
 `;
 
-exports[`inquirer-select-pro > interactions > should select the current option by <enter> when display filtered results 1`] = `
-"? Choose movie: (Press <tab> to select/deselect, <backspace> to remove selected
-option, <enter> to select option)
->>  god
->[ ] Goodfellas (1990)
- [ ] The Godfather (1972)
- [ ] The Godfather: Part II (1974)
- [ ] The Good, the Bad and the Ugly (1966)
-(Use arrow keys to reveal more options)"
-`;
-
 exports[`inquirer-select-pro > interactions > should work when options is a function and filter disabled 1`] = `
 "? Choose movie: (Press <tab> to select/deselect, <backspace> to remove selected
 option, <enter> to proceed) 

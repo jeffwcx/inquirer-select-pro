@@ -222,10 +222,6 @@ export function useSelect<Value, Multiple extends boolean>(
       if (status !== SelectStatus.LOADED) {
         return;
       }
-      if (filterInput && multiple) {
-        handleSelect(rl, true);
-        return;
-      }
       if (!multiple) {
         // For single selection, directly use <enter> to select
         handleSelect(rl);
