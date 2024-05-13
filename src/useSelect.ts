@@ -10,7 +10,9 @@ import {
   useState,
 } from '@inquirer/core';
 import {
+  check,
   isDownKey,
+  isSelectAllKey,
   isSelectable,
   isTabKey,
   isUpKey,
@@ -88,6 +90,7 @@ export function useSelect<Value, Multiple extends boolean>(
     required = false,
     defaultValue,
     clearInputWhenSelected = false,
+    canToggleAll = false,
     inputDelay = 200,
     validate = () => true,
     equals = (a, b) => a === b,
@@ -127,6 +130,7 @@ export function useSelect<Value, Multiple extends boolean>(
   });
 
   function setBehavior(key: keyof SelectBehaviors, value: boolean) {
+    if (behaviors[key] === value) return;
     setBehaviors({
       ...behaviors,
       [key]: value,
@@ -144,7 +148,7 @@ export function useSelect<Value, Multiple extends boolean>(
     rl.write(filterInput);
   }
 
-  // <tab/space/enter> selects or deselects an option
+  // <tab> selects or deselects an option
   function handleSelect(
     rl: InquirerReadline,
     clearInput = clearInputWhenSelected,
@@ -178,6 +182,33 @@ export function useSelect<Value, Multiple extends boolean>(
         return i === cursor ? toggle(item) : item;
       }),
     );
+  }
+
+  // <ctrl+a> toggle all options
+  function toggleAll(rl: InquirerReadline) {
+    if (cursor < 0 || displayItems.length <= 0) {
+      if (enableFilter) {
+        keepFilterInput(rl);
+      }
+      return;
+    }
+    const hasSelectAll = !displayItems.find(
+      (item) => isSelectable(item) && !item.checked,
+    );
+    if (hasSelectAll) {
+      selections.current = [];
+      setBehavior('deselect', true);
+      setDisplayItems(displayItems.map((item) => check(item, false)));
+    } else {
+      selections.current = displayItems.reduce((ss, item) => {
+        if (isSelectable(item)) {
+          ss.push({ ...item });
+        }
+        return ss;
+      }, [] as SelectOption<Value>[]);
+      setBehavior('select', true);
+      setDisplayItems(displayItems.map((item) => check(item, true)));
+    }
   }
 
   // <backspace> Remove the last selected option when filterInput is empty
@@ -245,7 +276,9 @@ export function useSelect<Value, Multiple extends boolean>(
         setBehavior('setCursor', true);
         setCursor(next);
       }
-    } else if (isTabKey(key) && multiple) {
+    } else if (canToggleAll && multiple && isSelectAllKey(key)) {
+      toggleAll(rl);
+    } else if (multiple && isTabKey(key)) {
       handleSelect(rl);
     } else {
       if (!enableFilter || status === SelectStatus.UNLOADED) return;
@@ -325,6 +358,8 @@ export function useSelect<Value, Multiple extends boolean>(
     loop,
     multiple,
     enableFilter,
+    canToggleAll,
+    required,
     behaviors,
   };
 }

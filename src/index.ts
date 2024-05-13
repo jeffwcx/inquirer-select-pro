@@ -81,8 +81,15 @@ function renderPage<Value>({
 }
 
 function renderHelpTip<Value>(context: SelectContext<Value>) {
-  const { theme, instructions, displayItems, pageSize, behaviors, multiple } =
-    context;
+  const {
+    theme,
+    instructions,
+    displayItems,
+    pageSize,
+    behaviors,
+    multiple,
+    canToggleAll,
+  } = context;
   let helpTipTop = '';
   let helpTipBottom = '';
   if (
@@ -101,6 +108,11 @@ function renderHelpTip<Value>(context: SelectContext<Value>) {
       if (!behaviors.select && !behaviors.deselect) {
         if (multiple) {
           keys.push(`${theme.style.key('tab')} to select/deselect`);
+        }
+        if (canToggleAll) {
+          keys.push(
+            `${theme.style.key('ctrl')} + ${theme.style.key('a')} to toggle all`,
+          );
         }
         keys.push(`${theme.style.key('enter')} to proceed`);
       }

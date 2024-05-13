@@ -33,6 +33,24 @@ exports[`inquirer-select-pro > interactions > should clear input after the optio
 (Use arrow keys to reveal more options)"
 `;
 
+exports[`inquirer-select-pro > interactions > should toggle all options when press <ctrl> + <a> 1`] = `
+"? Choose movie: (Press <backspace> to remove option)
+>> a, b, c, d
+>[✔] a
+ [✔] b
+ [✔] c
+(Use arrow keys to reveal more options)"
+`;
+
+exports[`inquirer-select-pro > interactions > should toggle all options when press <ctrl> + <a> 2`] = `
+"? Choose movie: (Press <backspace> to remove option)
+>> Type to search
+>[ ] a
+ [ ] b
+ [ ] c
+(Use arrow keys to reveal more options)"
+`;
+
 exports[`inquirer-select-pro > interactions > should work when options is a function and filter disabled 1`] = `
 "? Choose movie: (Press <tab> to select/deselect, <enter> to proceed) 
 >[ ] The Shawshank Redemption (1994)

@@ -1,5 +1,11 @@
 # inquirer-select-pro
 
+## 1.0.0-alpha.4
+
+### Minor Changes
+
+- Able to toggle all options
+
 ## 1.0.0-alpha.3
 
 ### Patch Changes

@@ -74,6 +74,13 @@ export interface UseSelectOptions<Value, Multiple extends boolean = true> {
    * `false`
    */
   clearInputWhenSelected?: boolean;
+  /**
+   * Enable toggle all options
+   *
+   * @defaultValue
+   * `false`
+   */
+  canToggleAll?: boolean;
 
   /**
    * The user's input is debounced, and the default debounce delay is 200ms.
@@ -149,6 +156,8 @@ export interface UseSelectReturnValue<Value> {
   loop: boolean;
   multiple: boolean;
   enableFilter: boolean;
+  canToggleAll: boolean;
+  required: boolean;
   behaviors: SelectBehaviors;
 }
 

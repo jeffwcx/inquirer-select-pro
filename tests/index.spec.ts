@@ -242,6 +242,43 @@ describe('inquirer-select-pro', () => {
       events.keypress('enter');
       expect(getScreen()).toBe(origin);
     });
+
+    it('should toggle all options when press <ctrl> + <a>', async () => {
+      const options = [
+        { name: 'a', value: 1 },
+        { name: 'b', value: 2 },
+        { name: 'c', value: 3 },
+        { name: 'd', value: 4 },
+      ];
+      await renderPrompt({
+        message,
+        options: (input) =>
+          options.filter(({ name }) => !input || name === input),
+        pageSize: 3,
+        inputDelay: 20,
+        canToggleAll: true,
+        required: true,
+      });
+      await waitForInteraction();
+      expect(getScreen().includes('<ctrl> + <a>')).toBe(true);
+      events.keypress({ name: 'a', ctrl: true });
+      expect(getScreen()).toMatchSnapshot();
+      events.keypress({ name: 'a', ctrl: true });
+      expect(getScreen()).toMatchSnapshot();
+      events.type('ab');
+      await wait(25);
+      await waitForInteraction();
+      events.keypress({ name: 'a', ctrl: true });
+      keyseq('backspace', 2);
+      await wait(25);
+      await waitForInteraction();
+      events.keypress({ name: 'a', ctrl: true });
+      events.keypress('down');
+      events.keypress('tab');
+      events.keypress({ name: 'a', ctrl: true });
+      events.keypress('enter');
+      await expect(answer).resolves.toHaveLength(4);
+    });
   });
 
   describe('appearance', () => {
@@ -347,7 +384,7 @@ describe('inquirer-select-pro', () => {
       expect(isLoading()).toBe(true);
       await waitForInteraction();
       events.type('any keys i want');
-      await wait(10);
+      await wait(20);
       await waitForInteraction();
       expect(getScreen().includes(emptyText)).toBe(true);
     });

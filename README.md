@@ -105,7 +105,7 @@ declare function useSelect<Value, Multiple extends boolean>(
 
 #### Returns
 
-[**_UseSelectReturnValue_**](./src/types.ts#L142)<!-- -->**_\<Value>_**
+[**_UseSelectReturnValue_**](./src/types.ts#L149)<!-- -->**_\<Value>_**
 
 ### Theming
 
@@ -199,6 +199,7 @@ pnpm test
 > Running `pnpm dev` actually allows you to specify the demo directly.
 
 Here is a list of available demos:
+
 - local
 - remote
 - filter-remote

@@ -46,6 +46,7 @@ const availableOptions = [
   'required',
   'loop',
   'multiple',
+  'canToggleAll',
 ];
 
 let whichDemo: Demos | null;
