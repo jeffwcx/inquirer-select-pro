@@ -81,40 +81,36 @@ function renderPage<Value>({
 }
 
 function renderHelpTip<Value>(context: SelectContext<Value>) {
-  const {
-    theme,
-    instructions,
-    displayItems,
-    pageSize,
-    behaviors,
-    multiple,
-    filterInput,
-  } = context;
+  const { theme, instructions, displayItems, pageSize, behaviors, multiple } =
+    context;
   let helpTipTop = '';
   let helpTipBottom = '';
   if (
     theme.helpMode === 'always' ||
     (theme.helpMode === 'auto' &&
-      !behaviors.select &&
-      !behaviors.deselect &&
-      !behaviors.submit &&
-      !behaviors.deleteOption &&
-      (instructions === undefined || instructions))
+      (instructions === undefined || instructions) &&
+      (!behaviors.select ||
+        !behaviors.deselect ||
+        !behaviors.deleteOption ||
+        !behaviors.setCursor))
   ) {
     if (instructions instanceof Function) {
       helpTipTop = instructions(context);
     } else {
       const keys = [];
-      if (multiple) {
-        keys.push(
-          `${theme.style.key('tab')} to select/deselect`,
-          `${theme.style.key('backspace')} to remove selected option`,
-        );
+      if (!behaviors.select && !behaviors.deselect) {
+        if (multiple) {
+          keys.push(`${theme.style.key('tab')} to select/deselect`);
+        }
+        keys.push(`${theme.style.key('enter')} to proceed`);
       }
-      keys.push(
-        `${theme.style.key('enter')}${filterInput ? ' to select option' : ' to proceed'}`,
-      );
-      helpTipTop = ` (Press ${keys.join(', ')})`;
+
+      if (behaviors.select && !behaviors.deleteOption) {
+        keys.push(`${theme.style.key('backspace')} to remove option`);
+      }
+      if (keys.length > 0) {
+        helpTipTop = ` (Press ${keys.join(', ')})`;
+      }
     }
 
     if (
@@ -135,12 +131,12 @@ function renderFilterInput<Value>(
   { theme, filterInput, status, placeholder }: SelectContext<Value>,
   answer: string,
 ) {
-  if (status === SelectStatus.UNLOADED) return '\n';
+  if (status === SelectStatus.UNLOADED) return '';
   let input = `\n${theme.icon.inputCursor} `;
   if (!answer && !filterInput) {
     input += theme.style.placeholder(placeholder);
   } else {
-    input += `${answer ? `${answer}` : ''} ${filterInput}`;
+    input += `${answer ? `${answer} ` : ''}${filterInput}`;
   }
   return input;
 }

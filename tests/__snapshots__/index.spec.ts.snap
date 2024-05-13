@@ -26,15 +26,15 @@ exports[`inquirer-select-pro > interactions > should be possible to filter in ra
 `;
 
 exports[`inquirer-select-pro > interactions > should clear input after the option is selected (clearInputWhenSelected=true) 1`] = `
-"? Choose movie:
+"? Choose movie: (Press <backspace> to remove option)
 >> Goodfellas (1990)
 >[✔] Goodfellas (1990)
- [ ] The Godfather (1972)"
+ [ ] The Godfather (1972)
+(Use arrow keys to reveal more options)"
 `;
 
 exports[`inquirer-select-pro > interactions > should work when options is a function and filter disabled 1`] = `
-"? Choose movie: (Press <tab> to select/deselect, <backspace> to remove selected
-option, <enter> to proceed) 
+"? Choose movie: (Press <tab> to select/deselect, <enter> to proceed) 
 >[ ] The Shawshank Redemption (1994)
  [ ] The Godfather (1972)
  [ ] The Godfather: Part II (1974)
@@ -43,8 +43,7 @@ option, <enter> to proceed)
 `;
 
 exports[`inquirer-select-pro > interactions > should work when options is a normal array 1`] = `
-"? Choose movie: (Press <tab> to select/deselect, <backspace> to remove selected
-option, <enter> to proceed) 
+"? Choose movie: (Press <tab> to select/deselect, <enter> to proceed) 
 >[ ] The Shawshank Redemption (1994)
  [ ] The Godfather (1972)
  [ ] The Godfather: Part II (1974)
@@ -52,50 +51,49 @@ option, <enter> to proceed)
 `;
 
 exports[`inquirer-select-pro > interactions > should work when options is a normal array 2`] = `
-"? Choose movie: The Shawshank Redemption (1994)
->[✔] The Shawshank Redemption (1994)
- [ ] The Godfather (1972)
- [ ] The Godfather: Part II (1974)"
+"? Choose movie: (Press <tab> to select/deselect, <enter> to proceed) 
+ [ ] The Dark Knight (2008)
+>[ ] 12 Angry Men (1957)
+ [ ] Schindler's List (1993)"
 `;
 
 exports[`inquirer-select-pro > interactions > should work when options is a normal array 3`] = `
-"? Choose movie: The Shawshank Redemption (1994)
+"? Choose movie: (Press <backspace> to remove option) 12 Angry Men (1957)
  [ ] The Dark Knight (2008)
->[ ] 12 Angry Men (1957)
+>[✔] 12 Angry Men (1957)
  [ ] Schindler's List (1993)"
 `;
 
 exports[`inquirer-select-pro > interactions > should work when options is a normal array 4`] = `
-"? Choose movie: The Shawshank Redemption (1994)
+"? Choose movie: (Press <backspace> to remove option) 12 Angry Men (1957)
  [ ] The Dark Knight (2008)
->[ ] 12 Angry Men (1957)
+>[✔] 12 Angry Men (1957)
  [ ] Schindler's List (1993)"
 `;
 
 exports[`inquirer-select-pro > interactions > should work when options is a normal array 5`] = `
-"? Choose movie: The Shawshank Redemption (1994), 12 Angry Men (1957)
- [✔] 12 Angry Men (1957)
+"? Choose movie: (Press <backspace> to remove option) 
+ [ ] 12 Angry Men (1957)
 >[ ] Schindler's List (1993)
  [ ] Pulp Fiction (1994)"
 `;
 
 exports[`inquirer-select-pro > interactions > should work when options is a normal array 6`] = `
-"? Choose movie: The Shawshank Redemption (1994), 12 Angry Men (1957)
- [✔] 12 Angry Men (1957)
+"? Choose movie: (Press <backspace> to remove option) 
+ [ ] 12 Angry Men (1957)
 >[ ] Schindler's List (1993)
  [ ] Pulp Fiction (1994)"
 `;
 
 exports[`inquirer-select-pro > interactions > should work when options is a normal array 7`] = `
-"? Choose movie: The Shawshank Redemption (1994)
+"? Choose movie: (Press <backspace> to remove option) 
  [ ] 12 Angry Men (1957)
 >[ ] Schindler's List (1993)
  [ ] Pulp Fiction (1994)"
 `;
 
 exports[`inquirer-select-pro > interactions > should work when options is an async function 1`] = `
-"? Choose movie: (Press <tab> to select/deselect, <backspace> to remove selected
-option, <enter> to proceed)
+"? Choose movie: (Press <tab> to select/deselect, <enter> to proceed)
 >> Type to search
 >[ ] The Shawshank Redemption (1994)
  [ ] The Godfather (1972)
@@ -105,35 +103,35 @@ option, <enter> to proceed)
 `;
 
 exports[`inquirer-select-pro > interactions > should work when options is an async function 2`] = `
-"? Choose movie:
->> The Shawshank Redemption (1994)
->[✔] The Shawshank Redemption (1994)
- [ ] The Godfather (1972)
- [ ] The Godfather: Part II (1974)
- [ ] The Dark Knight (2008)"
-`;
-
-exports[`inquirer-select-pro > interactions > should work when options is an async function 3`] = `
-"? Choose movie:
->> The Shawshank Redemption (1994)
+"? Choose movie: (Press <tab> to select/deselect, <enter> to proceed)
+>> Type to search
  [ ] The Godfather: Part II (1974)
  [ ] The Dark Knight (2008)
 >[ ] 12 Angry Men (1957)
+ [ ] Schindler's List (1993)"
+`;
+
+exports[`inquirer-select-pro > interactions > should work when options is an async function 3`] = `
+"? Choose movie: (Press <backspace> to remove option)
+>> 12 Angry Men (1957)
+ [ ] The Godfather: Part II (1974)
+ [ ] The Dark Knight (2008)
+>[✔] 12 Angry Men (1957)
  [ ] Schindler's List (1993)"
 `;
 
 exports[`inquirer-select-pro > interactions > should work when options is an async function 4`] = `
-"? Choose movie:
->> The Shawshank Redemption (1994) god
+"? Choose movie: (Press <backspace> to remove option)
+>> 12 Angry Men (1957) god
  [ ] The Godfather: Part II (1974)
  [ ] The Dark Knight (2008)
->[ ] 12 Angry Men (1957)
+>[✔] 12 Angry Men (1957)
  [ ] Schindler's List (1993)"
 `;
 
 exports[`inquirer-select-pro > interactions > should work when options is an async function 5`] = `
-"? Choose movie:
->> The Shawshank Redemption (1994) god
+"? Choose movie: (Press <backspace> to remove option)
+>> 12 Angry Men (1957) god
 >[ ] Goodfellas (1990)
  [ ] The Godfather (1972)
  [ ] The Godfather: Part II (1974)
@@ -141,8 +139,8 @@ exports[`inquirer-select-pro > interactions > should work when options is an asy
 `;
 
 exports[`inquirer-select-pro > interactions > should work when options is an async function 6`] = `
-"? Choose movie:
->> The Shawshank Redemption (1994), Goodfellas (1990) god
+"? Choose movie: (Press <backspace> to remove option)
+>> 12 Angry Men (1957), Goodfellas (1990) god
  [✔] Goodfellas (1990)
 >[ ] The Godfather (1972)
  [ ] The Godfather: Part II (1974)
@@ -150,8 +148,8 @@ exports[`inquirer-select-pro > interactions > should work when options is an asy
 `;
 
 exports[`inquirer-select-pro > interactions > should work when options is an async function 7`] = `
-"? Choose movie:
->> The Shawshank Redemption (1994), Goodfellas (1990) god
+"? Choose movie: (Press <backspace> to remove option)
+>> 12 Angry Men (1957), Goodfellas (1990) god
  [✔] Goodfellas (1990)
 >[ ] The Godfather (1972)
  [ ] The Godfather: Part II (1974)
@@ -160,8 +158,8 @@ exports[`inquirer-select-pro > interactions > should work when options is an asy
 
 exports[`inquirer-select-pro > interactions > should work when options is an async function 8`] = `
 "? Choose movie:
->> The Shawshank Redemption (1994), Goodfellas (1990)
- [✔] Goodfellas (1990)
+>> 12 Angry Men (1957)
+ [ ] Goodfellas (1990)
 >[ ] The Godfather (1972)
  [ ] The Godfather: Part II (1974)
  [ ] The Good, the Bad and the Ugly (1966)"

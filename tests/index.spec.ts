@@ -70,11 +70,11 @@ describe('inquirer-select-pro', () => {
         afterRemoveOption?: () => Promise<any>;
       } = {},
     ) {
-      // select
-      events.keypress('tab');
-      expect(getScreen()).toMatchSnapshot();
       // setCursor
       keyseq('down', 4);
+      expect(getScreen()).toMatchSnapshot();
+      // select
+      events.keypress('tab');
       expect(getScreen()).toMatchSnapshot();
       // filter
       events.type('god');
@@ -103,14 +103,8 @@ describe('inquirer-select-pro', () => {
       });
       expect(getScreen()).toMatchSnapshot();
       await interactInMutipleMode();
-      await expect(answer).resolves.toMatchInlineSnapshot(`
-        [
-          "The Shawshank Redemption",
-        ]
-      `);
-      expect(getScreen()).toMatchInlineSnapshot(
-        `"? Choose movie: The Shawshank Redemption (1994)"`,
-      );
+      await expect(answer).resolves.toMatchInlineSnapshot(`[]`);
+      expect(getScreen()).toMatchInlineSnapshot(`"? Choose movie:"`);
     });
 
     it('should work when options is an async function', async () => {
@@ -126,7 +120,7 @@ describe('inquirer-select-pro', () => {
       expect(getScreen()).toMatchSnapshot();
       expect(options).toHaveBeenCalledOnce();
       await interactInMutipleMode({
-        backspace: 3,
+        backspace: 4,
         afterFilter: async () => {
           // debounce delay
           await wait(50);
@@ -139,12 +133,11 @@ describe('inquirer-select-pro', () => {
       });
       await expect(answer).resolves.toMatchInlineSnapshot(`
         [
-          "The Shawshank Redemption",
-          "Goodfellas",
+          "12 Angry Men",
         ]
       `);
       expect(getScreen()).toMatchInlineSnapshot(
-        `"? Choose movie: The Shawshank Redemption (1994), Goodfellas (1990)"`,
+        `"? Choose movie: 12 Angry Men (1957)"`,
       );
     });
     it('should work when options is a function and filter disabled', async () => {
@@ -267,13 +260,14 @@ describe('inquirer-select-pro', () => {
       });
       events.keypress('tab');
       expect(getScreen()).toMatchInlineSnapshot(`
-        "? select a
+        "? select (Press <backspace> to remove option) a
         >[✔] a
-        -[x] b (disabled)"
+        -[x] b (disabled)
+        (Use arrow keys to reveal more options)"
       `);
       events.keypress('down');
       expect(getScreen()).toMatchInlineSnapshot(`
-        "? select a
+        "? select (Press <backspace> to remove option) a
         -[x] b (disabled)
         >[ ] c"
       `);
@@ -289,14 +283,14 @@ describe('inquirer-select-pro', () => {
       events.keypress('tab');
       keyseq('down', 2);
       expect(getScreen()).toMatchInlineSnapshot(`
-        "? select a
+        "? select (Press <backspace> to remove option) a
         -[x] d (stale)
         >[✔] a
         -[x] b (disabled)"
       `);
       keyseq('up', 1);
       expect(getScreen()).toMatchInlineSnapshot(`
-        "? select a
+        "? select (Press <backspace> to remove option) a
         -[x] b (disabled)
         >[ ] c
         -[x] d (stale)"
@@ -312,15 +306,16 @@ describe('inquirer-select-pro', () => {
       });
       events.keypress('tab');
       expect(getScreen()).toMatchInlineSnapshot(`
-        "? select a
+        "? select (Press <backspace> to remove option) a
          ──────────────
         >[✔] a
         -[x] b (disabled)
-         [ ] c"
+         [ ] c
+        (Use arrow keys to reveal more options)"
       `);
       keyseq('down', 2);
       expect(getScreen()).toMatchInlineSnapshot(`
-        "? select a
+        "? select (Press <backspace> to remove option) a
          ──────────────
          ──────────────
         >[✔] a
@@ -519,7 +514,7 @@ describe('inquirer-select-pro', () => {
       // filter
       expect(getScreen()).toMatchInlineSnapshot(`
         "? choose point
-        >>  1
+        >> 1
         >[ ] point 1
          [ ] point 10"
       `);
@@ -534,7 +529,7 @@ describe('inquirer-select-pro', () => {
       events.keypress('tab');
       expect(getScreen()).toMatchInlineSnapshot(`
         "? choose point
-        >>  1
+        >> 1
         >[ ] point 1
          [ ] point 10"
       `);
