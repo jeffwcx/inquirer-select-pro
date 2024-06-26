@@ -1,5 +1,11 @@
 # inquirer-select-pro
 
+## 1.0.0-alpha.6
+
+### Patch Changes
+
+- [`bae2aee`](https://github.com/jeffwcx/inquirer-select-pro/commit/bae2aeeff7784435d8e9dac46b959fe68907e767) Thanks [@jeffwcx](https://github.com/jeffwcx)! - make @inquirer/core as external dep which can reduce the size of cjs
+
 ## 1.0.0-alpha.5
 
 ### Patch Changes
