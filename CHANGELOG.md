@@ -1,5 +1,11 @@
 # inquirer-select-pro
 
+## 1.0.0-alpha.5
+
+### Patch Changes
+
+- [`83a41d5`](https://github.com/jeffwcx/inquirer-select-pro/commit/83a41d58869f38b5a6c083c666beb5d1ef8ae698) Thanks [@jeffwcx](https://github.com/jeffwcx)! - bundle all deps when outputting in cjs format (Fix error that occurs when require esm in cjs)
+
 ## 1.0.0-alpha.4
 
 ### Minor Changes
