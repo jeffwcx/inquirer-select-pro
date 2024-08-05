@@ -1,5 +1,11 @@
 # inquirer-select-pro
 
+## 1.0.0-alpha.7
+
+### Patch Changes
+
+- [`2df3d9b`](https://github.com/jeffwcx/inquirer-select-pro/commit/2df3d9b5aa9421e37f3165a23fc0dde7f0204c0f) Thanks [@jeffwcx](https://github.com/jeffwcx)! - remove preinstall script
+
 ## 1.0.0-alpha.6
 
 ### Patch Changes
