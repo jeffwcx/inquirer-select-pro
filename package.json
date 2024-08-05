@@ -39,7 +39,6 @@
     "build": "tsup",
     "dev": "tsx ./examples/cli.ts",
     "format": "eslint . --cache --fix",
-    "preinstall": "npx only-allow pnpm",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0 --cache",
     "prepack": "pnpm build",
     "prepare": "husky",
