@@ -494,17 +494,19 @@ describe('inquirer-select-pro', () => {
       // @ts-ignore
       await renderPrompt({
         ...optionsForDisplayValue,
-        defaultValue: 'a',
+        defaultValue: 1,
         multiple: false,
       });
       await waitForInteraction();
       expect(getScreen()).toMatchInlineSnapshot(`
         "? Choose movie:
-        >> a
-        > a
-          One
+        >> One
+          a
+        > One
           [object Object]"
       `);
+      events.keypress('enter');
+      expect(await answer).toMatchInlineSnapshot(`1`);
     });
 
     it('should throw error when `defaultValue` is non-array in multiple selection mode', async () => {

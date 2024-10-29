@@ -161,15 +161,20 @@ export function useSelect<Value, Multiple extends boolean>(
     }
     const targetOption = displayItems[cursor];
     if (isSelectable(targetOption)) {
-      if (targetOption.checked) {
-        const currentSelection = selections.current.filter(
-          (op) => !equals(targetOption.value, op.value),
-        );
-        setBehavior('deselect', true);
-        selections.current = currentSelection;
+      if (multiple) {
+        if (targetOption.checked) {
+          const currentSelection = selections.current.filter(
+            (op) => !equals(targetOption.value, op.value),
+          );
+          setBehavior('deselect', true);
+          selections.current = currentSelection;
+        } else {
+          setBehavior('select', true);
+          selections.current = [...selections.current, { ...targetOption }];
+        }
       } else {
         setBehavior('select', true);
-        selections.current = [...selections.current, { ...targetOption }];
+        selections.current = [{ ...targetOption }];
       }
       if (enableFilter && !targetOption.checked && clearInput) {
         clearFilterInput(rl);
@@ -297,13 +302,21 @@ export function useSelect<Value, Multiple extends boolean>(
       return;
     }
     const ss = [...selections.current];
-    const finalItems = items.map((item) => {
+    let firstChecked = -1;
+    let firstSelectable = -1;
+    const finalItems = items.map((item, index) => {
       const finalItem = { ...item };
       if (isSelectable(finalItem)) {
+        if (firstSelectable < 0) {
+          firstSelectable = index;
+        }
         ss.forEach((op) => {
           if (equals(op.value, finalItem.value)) {
             finalItem.checked = true;
             op.name = finalItem.name;
+            if (firstChecked < 0) {
+              firstChecked = index;
+            }
           }
         });
       }
@@ -311,7 +324,11 @@ export function useSelect<Value, Multiple extends boolean>(
     });
     setDisplayItems(finalItems);
     selections.current = ss;
-    setCursor(finalItems.findIndex(isSelectable));
+    if (multiple) {
+      setCursor(firstSelectable);
+    } else {
+      setCursor(firstChecked < 0 ? firstSelectable : firstChecked);
+    }
   }
 
   async function loadData() {
