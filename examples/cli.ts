@@ -47,6 +47,7 @@ const availableOptions = [
   'loop',
   'multiple',
   'canToggleAll',
+  'confirmDelete',
 ];
 
 let whichDemo: Demos | null;

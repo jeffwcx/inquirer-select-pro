@@ -7,6 +7,11 @@ export type SelectOption<Value> = {
   disabled?: boolean | string;
 };
 
+/**
+ * @internal
+ */
+export type SelectedOption<Value> = SelectOption<Value> & { focused?: boolean };
+
 export enum SelectStatus {
   UNLOADED = 'unloaded',
   FILTERING = 'filtering',
@@ -33,7 +38,7 @@ export type SelectTheme = {
   style: {
     disabledOption: (text: string) => string;
     renderSelectedOptions: <T>(
-      selectedOptions: ReadonlyArray<SelectOption<T>>,
+      selectedOptions: ReadonlyArray<SelectedOption<T>>,
       allOptions: ReadonlyArray<SelectItem<T>>,
     ) => string;
     emptyText: (text: string) => string;
@@ -74,6 +79,14 @@ export interface UseSelectOptions<Value, Multiple extends boolean = true> {
    * `false`
    */
   clearInputWhenSelected?: boolean;
+
+  /**
+   * Only valid when multiple is true, confirmation is required when deleting selectable options
+   *
+   * @defaultValue
+   * `false`
+   */
+  confirmDelete?: boolean;
   /**
    * Enable toggle all options
    *
@@ -144,10 +157,13 @@ export interface SelectBehaviors {
   setCursor: boolean;
   filter: boolean;
   deleteOption: boolean;
+  blur: boolean;
 }
 
 export interface UseSelectReturnValue<Value> {
   selections: SelectOption<Value>[];
+  focusedSelection: number;
+  confirmDelete: boolean;
   filterInput: string;
   displayItems: ReadonlyArray<InternalSelectItem<Value>>;
   cursor: number;

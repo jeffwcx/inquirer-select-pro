@@ -56,6 +56,29 @@ const answer = await select({
 });
 ```
 
+### clearInputWhenSelected
+
+Clear the filter input when the option is selected (also causes the option list to change).
+
+### confirmDelete（multiple only）
+
+The first time you try the delete key, it will focus on the option to be deleted, and the second time it will remove the focused option.
+
+```ts
+import { select } from 'inquirer-select-pro';
+const answer = await select({
+  message: 'select',
+  confirmDelete: true,
+  options: async (input) => {
+    const res = await fetch('<url>', {
+      body: new URLSearchParams({ keyword: input }),
+    });
+    if (!res.ok) throw new Error('fail to get list!');
+    return await res.json();
+  },
+});
+```
+
 ## API
 
 ### select()
@@ -64,7 +87,7 @@ An inquirer select that supports multiple selections and filtering
 
 #### Parameters
 
-- `config` [**_SelectProps_**](./src/types.ts#L166) <!-- -->**_\<Value, Multiple>_**
+- `config` [**_SelectProps_**](./src/types.ts#L191) <!-- -->**_\<Value, Multiple>_**
 
 #### Returns
 
@@ -101,11 +124,11 @@ declare function useSelect<Value, Multiple extends boolean>(
 
 #### Parameters
 
-- `props` [**_UseSelectOptions_**](./src/types.ts#L58)<!-- -->**_\<Value, Multiple>_**
+- `props` [**_UseSelectOptions_**](./src/types.ts#L63)<!-- -->**_\<Value, Multiple>_**
 
 #### Returns
 
-[**_UseSelectReturnValue_**](./src/types.ts#L149)<!-- -->**_\<Value>_**
+[**_UseSelectReturnValue_**](./src/types.ts#L163)<!-- -->**_\<Value>_**
 
 ### Theming
 
@@ -216,6 +239,8 @@ Parameters can also be fixed. The following parameters can be fixed:
 - required
 - loop
 - multiple
+- canToggleAll
+- confirmDelete
 
 ```bash
 pnpm dev filter-demo --multiple=false

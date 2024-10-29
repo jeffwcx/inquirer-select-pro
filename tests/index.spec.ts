@@ -279,6 +279,27 @@ describe('inquirer-select-pro', () => {
       events.keypress('enter');
       await expect(answer).resolves.toHaveLength(4);
     });
+
+    it('should work as expected when confirmDelete=true', async () => {
+      await renderPrompt({
+        message,
+        options: quickRemoteData,
+        pageSize: 4,
+        confirmDelete: true,
+      });
+      await waitForInteraction();
+      events.keypress('tab');
+      events.keypress('down');
+      expect(getScreen()).toMatchSnapshot();
+      events.keypress('backspace');
+      expect(getScreen()).toMatchSnapshot();
+      events.keypress('escape');
+      expect(getScreen()).toMatchSnapshot();
+      events.keypress('backspace');
+      expect(getScreen()).toMatchSnapshot();
+      events.keypress('backspace');
+      expect(getScreen()).toMatchSnapshot();
+    });
   });
 
   describe('appearance', () => {

@@ -51,6 +51,52 @@ exports[`inquirer-select-pro > interactions > should toggle all options when pre
 (Use arrow keys to reveal more options)"
 `;
 
+exports[`inquirer-select-pro > interactions > should work as expected when confirmDelete=true 1`] = `
+"? Choose movie: (Press <backspace> to remove option)
+>> The Shawshank Redemption (1994) 
+ [✔] The Shawshank Redemption (1994)
+>[ ] The Godfather (1972)
+ [ ] The Godfather: Part II (1974)
+ [ ] The Dark Knight (2008)"
+`;
+
+exports[`inquirer-select-pro > interactions > should work as expected when confirmDelete=true 2`] = `
+"? Choose movie: (Press <backspace> again to remove option, <up/down> or <esc> to
+ exit)
+>> The Shawshank Redemption (1994) 
+ [✔] The Shawshank Redemption (1994)
+>[ ] The Godfather (1972)
+ [ ] The Godfather: Part II (1974)
+ [ ] The Dark Knight (2008)"
+`;
+
+exports[`inquirer-select-pro > interactions > should work as expected when confirmDelete=true 3`] = `
+"? Choose movie: (Press <backspace> to remove option)
+>> The Shawshank Redemption (1994) 
+ [✔] The Shawshank Redemption (1994)
+>[ ] The Godfather (1972)
+ [ ] The Godfather: Part II (1974)
+ [ ] The Dark Knight (2008)"
+`;
+
+exports[`inquirer-select-pro > interactions > should work as expected when confirmDelete=true 4`] = `
+"? Choose movie: (Press <backspace> again to remove option)
+>> The Shawshank Redemption (1994) 
+ [✔] The Shawshank Redemption (1994)
+>[ ] The Godfather (1972)
+ [ ] The Godfather: Part II (1974)
+ [ ] The Dark Knight (2008)"
+`;
+
+exports[`inquirer-select-pro > interactions > should work as expected when confirmDelete=true 5`] = `
+"? Choose movie:
+>> Type to search
+ [ ] The Shawshank Redemption (1994)
+>[ ] The Godfather (1972)
+ [ ] The Godfather: Part II (1974)
+ [ ] The Dark Knight (2008)"
+`;
+
 exports[`inquirer-select-pro > interactions > should work when options is a function and filter disabled 1`] = `
 "? Choose movie: (Press <tab> to select/deselect, <enter> to proceed) 
 >[ ] The Shawshank Redemption (1994)

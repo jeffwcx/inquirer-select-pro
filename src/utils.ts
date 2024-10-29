@@ -10,6 +10,19 @@ export function isDownKey(key: KeypressEvent) {
   return key.name === 'down';
 }
 
+export function isDirectionKey(key: KeypressEvent) {
+  return (
+    key.name === 'up' ||
+    key.name === 'down' ||
+    key.name === 'left' ||
+    key.name === 'right'
+  );
+}
+
+export function isEscKey(key: KeypressEvent) {
+  return key.name === 'escape';
+}
+
 export function isTabKey(key: KeypressEvent) {
   return key.name === 'tab';
 }

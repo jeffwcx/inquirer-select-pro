@@ -11,7 +11,9 @@ import {
 } from '@inquirer/core';
 import {
   check,
+  isDirectionKey,
   isDownKey,
+  isEscKey,
   isSelectAllKey,
   isSelectable,
   isTabKey,
@@ -25,6 +27,7 @@ import {
   type SelectOption,
   SelectStatus,
   type SelectValue,
+  type SelectedOption,
   type UseSelectOptions,
   type UseSelectReturnValue,
 } from './types';
@@ -53,7 +56,8 @@ function transformDefaultValue<Value, Multiple>(
         ({
           name: value2Name(value),
           value,
-        }) satisfies SelectOption<Value>,
+          focused: false,
+        }) satisfies SelectedOption<Value>,
     );
   }
   return [
@@ -91,6 +95,7 @@ export function useSelect<Value, Multiple extends boolean>(
     defaultValue,
     clearInputWhenSelected = false,
     canToggleAll = false,
+    confirmDelete = false,
     inputDelay = 200,
     validate = () => true,
     equals = (a, b) => a === b,
@@ -116,7 +121,8 @@ export function useSelect<Value, Multiple extends boolean>(
   const loader = useRef<Promise<any>>();
   const [filterInput, setFilterInput] = useState<string>('');
 
-  const selections = useRef<SelectOption<Value>[]>(
+  const [focused, setFocused] = useState(-1);
+  const selections = useRef<SelectedOption<Value>[]>(
     transformDefaultValue(defaultValue, multiple),
   );
 
@@ -127,6 +133,7 @@ export function useSelect<Value, Multiple extends boolean>(
     filter: false,
     setCursor: false,
     deleteOption: false,
+    blur: false,
   });
 
   function setBehavior(key: keyof SelectBehaviors, value: boolean) {
@@ -221,6 +228,12 @@ export function useSelect<Value, Multiple extends boolean>(
     if (selections.current.length <= 0) return;
     const lastIndex = selections.current.length - 1;
     const lastSection = selections.current[lastIndex];
+    // enter focus mode
+    if (confirmDelete && focused < 0) {
+      lastSection.focused = true;
+      setFocused(lastIndex);
+      return;
+    }
     const ss = selections.current.slice(0, lastIndex);
     setBehavior('deleteOption', true);
     selections.current = ss;
@@ -254,6 +267,20 @@ export function useSelect<Value, Multiple extends boolean>(
   }
 
   useKeypress(async (key, rl) => {
+    if (focused >= 0) {
+      if (isBackspaceKey(key)) {
+        removeLastSection();
+        setFocused(-1);
+      } else if (isDirectionKey(key) || isEscKey(key)) {
+        // quit focus mode
+        const focusedSelection = selections.current[focused];
+        focusedSelection.focused = false;
+        setFocused(-1);
+        setBehavior('blur', true);
+      }
+      clearFilterInput(rl);
+      return;
+    }
     if (isEnterKey(key)) {
       if (status !== SelectStatus.LOADED) {
         return;
@@ -367,6 +394,8 @@ export function useSelect<Value, Multiple extends boolean>(
 
   return {
     selections: selections.current,
+    focusedSelection: focused,
+    confirmDelete,
     filterInput,
     displayItems,
     cursor,

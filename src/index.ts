@@ -32,7 +32,13 @@ const defaultSelectTheme: (multiple: boolean) => SelectTheme = (multiple) => ({
   style: {
     disabledOption: (text: string) => chalk.dim(`-[x] ${text}`),
     renderSelectedOptions: (selectedOptions) =>
-      selectedOptions.map((option) => option.name || option.value).join(', '),
+      selectedOptions
+        .map((option) =>
+          option.focused
+            ? chalk.inverse(option.name || option.value)
+            : option.name || option.value,
+        )
+        .join(', '),
     emptyText: (text) => `${chalk.blue(figures.info)} ${chalk.bold(text)}`,
     placeholder: (text: string) => chalk.dim(text),
   },
@@ -89,6 +95,7 @@ function renderHelpTip<Value>(context: SelectContext<Value>) {
     behaviors,
     multiple,
     canToggleAll,
+    focusedSelection,
   } = context;
   let helpTipTop = '';
   let helpTipBottom = '';
@@ -118,7 +125,17 @@ function renderHelpTip<Value>(context: SelectContext<Value>) {
       }
 
       if (behaviors.select && !behaviors.deleteOption) {
-        keys.push(`${theme.style.key('backspace')} to remove option`);
+        keys.push(
+          `${
+            theme.style.key('backspace') +
+            (focusedSelection >= 0 ? ` ${theme.style.highlight('again')}` : '')
+          } to remove option`,
+        );
+      }
+      if (!behaviors.blur && focusedSelection >= 0) {
+        keys.push(
+          `${theme.style.key('up/down')} or ${theme.style.key('esc')} to exit`,
+        );
       }
       if (keys.length > 0) {
         helpTipTop = ` (Press ${keys.join(', ')})`;
@@ -140,7 +157,14 @@ function renderHelpTip<Value>(context: SelectContext<Value>) {
 }
 
 function renderFilterInput<Value>(
-  { theme, filterInput, status, placeholder }: SelectContext<Value>,
+  {
+    theme,
+    filterInput,
+    status,
+    placeholder,
+    focusedSelection,
+    confirmDelete,
+  }: SelectContext<Value>,
   answer: string,
 ) {
   if (status === SelectStatus.UNLOADED) return '';
@@ -149,6 +173,10 @@ function renderFilterInput<Value>(
     input += theme.style.placeholder(placeholder);
   } else {
     input += `${answer ? `${answer} ` : ''}${filterInput}`;
+  }
+  if (confirmDelete) {
+    input +=
+      focusedSelection >= 0 ? ansiEscapes.cursorHide : ansiEscapes.cursorShow;
   }
   return input;
 }
