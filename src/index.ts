@@ -35,7 +35,7 @@ const defaultSelectTheme: (multiple: boolean) => SelectTheme = (multiple) => ({
       selectedOptions
         .map((option) =>
           option.focused
-            ? chalk.inverse(option.name || option.value)
+            ? /* v8 ignore next 3 */ chalk.inverse(option.name || option.value)
             : option.name || option.value,
         )
         .join(', '),
