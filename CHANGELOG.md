@@ -1,5 +1,11 @@
 # inquirer-select-pro
 
+## 1.0.0-alpha.8
+
+### Patch Changes
+
+- [`bfa182f`](https://github.com/jeffwcx/inquirer-select-pro/commit/bfa182fc677578a23d6212ec08607bc5f4a9362f) Thanks [@jeffwcx](https://github.com/jeffwcx)! - add confirmDelete mode and fix bugs
+
 ## 1.0.0-alpha.7
 
 ### Patch Changes
