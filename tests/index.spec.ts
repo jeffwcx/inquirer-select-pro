@@ -184,6 +184,26 @@ describe('inquirer-select-pro', () => {
       );
     });
 
+    it('should get the result when press <enter> in multi selection mode when selectFocusedOnSubmit=true', async () => {
+      await renderPrompt({
+        message,
+        options: top100Films,
+        multiple: true,
+        pageSize: 3,
+        selectFocusedOnSubmit: true,
+      });
+      events.keypress('enter');
+      await expect(answer).resolves.toMatchInlineSnapshot(
+        `\
+[
+  "The Shawshank Redemption",
+]`,
+      );
+      expect(getScreen()).toMatchInlineSnapshot(
+        `"? Choose movie: The Shawshank Redemption (1994)"`,
+      );
+    });
+
     it('should be possible to filter in radio selection mode', async () => {
       await renderPrompt({
         message,
