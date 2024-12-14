@@ -48,6 +48,7 @@ const availableOptions = [
   'multiple',
   'canToggleAll',
   'confirmDelete',
+  'selectFocusedOnSubmit',
 ];
 
 let whichDemo: Demos | null;

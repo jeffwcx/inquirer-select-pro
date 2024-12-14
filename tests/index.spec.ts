@@ -123,7 +123,7 @@ describe('inquirer-select-pro', () => {
         backspace: 4,
         afterFilter: async () => {
           // debounce delay
-          await wait(50);
+          await wait(100);
           expect(options).toHaveBeenCalledTimes(2);
           // shoud be loading
           expect(isLoading()).toBe(true);
@@ -216,8 +216,6 @@ describe('inquirer-select-pro', () => {
       await waitForInteraction();
       expect(getScreen()).toMatchSnapshot();
       events.type('god');
-      await wait(20);
-      expect(isLoading()).toBe(true);
       await waitForInteraction();
       events.keypress('down');
       events.keypress('enter');

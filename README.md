@@ -87,7 +87,7 @@ An inquirer select that supports multiple selections and filtering
 
 #### Parameters
 
-- `config` [**_SelectProps_**](./src/types.ts#L191) <!-- -->**_\<Value, Multiple>_**
+- `config` [**_SelectProps_**](./src/types.ts#L198) <!-- -->**_\<Value, Multiple>_**
 
 #### Returns
 
@@ -128,7 +128,7 @@ declare function useSelect<Value, Multiple extends boolean>(
 
 #### Returns
 
-[**_UseSelectReturnValue_**](./src/types.ts#L163)<!-- -->**_\<Value>_**
+[**_UseSelectReturnValue_**](./src/types.ts#L170)<!-- -->**_\<Value>_**
 
 ### Theming
 
@@ -241,6 +241,7 @@ Parameters can also be fixed. The following parameters can be fixed:
 - multiple
 - canToggleAll
 - confirmDelete
+- selectFocusedOnSubmit
 
 ```bash
 pnpm dev filter-demo --multiple=false
