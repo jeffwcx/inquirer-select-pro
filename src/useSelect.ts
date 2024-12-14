@@ -90,6 +90,7 @@ export function useSelect<Value, Multiple extends boolean>(
     options,
     loop = false,
     multiple = true,
+    selectFocusedOnSubmit = false,
     filter = true,
     required = false,
     defaultValue,
@@ -285,8 +286,11 @@ export function useSelect<Value, Multiple extends boolean>(
       if (status !== SelectStatus.LOADED) {
         return;
       }
-      if (!multiple) {
-        // For single selection, directly use <enter> to select
+      if (
+        !multiple ||
+        (selectFocusedOnSubmit && selections.current.length === 0)
+      ) {
+        // For single selection or if no option is selected and selectFocusedOnSubmit is enabled, directly use <enter> to select
         handleSelect(rl);
       }
       await submit();

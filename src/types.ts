@@ -140,6 +140,13 @@ export interface UseSelectOptions<Value, Multiple extends boolean = true> {
    */
   multiple?: Multiple;
   /**
+   * Select the currently focused option when submitting (press enter), if no other options are already selected.
+   *
+   * @defaultValue
+   * `false`
+   */
+  selectFocusedOnSubmit?: boolean;
+  /**
    * validate when submitting (press enter). Only when true is returned will the validation pass.
    *
    * @defaultValue
