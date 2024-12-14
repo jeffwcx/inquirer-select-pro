@@ -1,5 +1,11 @@
 # inquirer-select-pro
 
+## 1.0.0-alpha.9
+
+### Patch Changes
+
+- [`507e8c2`](https://github.com/jeffwcx/inquirer-select-pro/commit/507e8c2866da2052b9c01ff8acd7fad7889c6b29) Thanks [@jeffwcx](https://github.com/jeffwcx)! - add `selectFocusedOnSubmit` option and fix CI issues
+
 ## 1.0.0-alpha.8
 
 ### Patch Changes
